@@ -104,16 +104,16 @@ const AuthForm = ({ isSignup, onSubmit }) => {
             Remember Me
           </RememberMe>
           <ForgotPassword>
-            <Link to="/forgot-password">Forgot Password?</Link>
+            <Link to="/ForgotPassword">Forgot Password?</Link>
           </ForgotPassword>
         </OptionsContainer>
       )}
       <Button type="submit">{isSignup ? 'Sign Up' : 'Log In'}</Button>
       <SwitchLink>
         {isSignup ? (
-          <Link to="/login" >Already have an account? Log In</Link>
+          <Link to="/Login" >Already have an account? Log In</Link>
         ) : (
-          <Link to="/signup" >Don't have an account? Sign Up</Link>
+          <Link to="/Signup" >Don't have an account? Sign Up</Link>
         )}
       </SwitchLink>
     </Form>

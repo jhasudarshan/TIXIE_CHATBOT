@@ -1,17 +1,19 @@
+
 // src/components/Layout.jsx
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6); /* Optional: Dark overlay */
 `;
 
 const Box = styled.div`
-  background-color: #1e1e1e; /* Dark card background */
-  padding: 30px 20px 30px 20px; /* Increased padding for a longer card */
+  //background-color: #1e1e1e; /* Dark card background */
+  padding: 30px 20px; /* Increased padding for a longer card */
   border-radius: 20px;
   
   width: 100%;
@@ -27,7 +29,21 @@ const Box = styled.div`
 
 `;
 
+
 const Layout = ({ children }) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname === '/Login' || pathname === '/Signup') {
+      document.body.classList.add('auth-background');
+    } else {
+      document.body.classList.remove('auth-background');
+    }
+    return () => {
+      document.body.classList.remove('auth-background'); // Clean up class on unmount
+    };
+  }, [pathname]);
+
   return (
     <Container>
       <Box>
@@ -38,3 +54,5 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
+
+

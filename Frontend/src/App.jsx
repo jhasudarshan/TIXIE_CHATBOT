@@ -1,72 +1,24 @@
-import React, { useState } from "react";
-import Navbar from "./components/Navbar";
-import OverlayText from "./components/OverlayText";
-import Chatbot from "./components/Chatbot";
-import AboutUsBox from "./components/AboutUsBox";
+import React from "react";
 import './styles/App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Home from './pages/Home';
+import ForgotPassword from './pages/ForgotPassword';
+import Layout from './components/Layout';
 
-function App() {
-  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
-
-  const handleOpenChatbot = () => {
-    setIsChatbotOpen(true);
-  };
-
-  const handleCloseChatbot = () => {
-    setIsChatbotOpen(false);
-  };
-
+const App = () => {
   return (
-    <>
-      <video
-        className="background-video-fixed"
-        autoPlay
-        muted
-        loop
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          zIndex: -1000,
-        }}
-      >
-        <source src="/videoplayback.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      <Navbar />
-
-      <section id="home" className="section section-one">
-        <OverlayText />
-        <button className="chatbot-button" onClick={handleOpenChatbot}>
-          Open Chatbot
-        </button>
-      </section>
-
-      {isChatbotOpen && (
-        <Chatbot onClose={handleCloseChatbot} />
-      )}
-
-      <section id="about" className="section section-two">
-        <AboutUsBox />
-      </section>
-
-      <footer id="contact" className="footer footer-three">
-        <div className="footer-container">
-          <p className="text-center">Some text in the center</p>
-          <div className="d-flex justify-content-center">
-            <a href="#" className="mx-2">About</a>
-            <a href="#" className="mx-2">Contact</a>
-            <a href="#" className="mx-2">Login</a>
-          </div>
-          <p className="text-center mt-2">&copy; Made with love by Team Botcoders</p>
-        </div>
-      </footer>
-    </>
+    <Router>
+      <Routes>
+      <Route path="/" element={<Home/>} />
+      <Route path="/Login" element={<Layout><Login /></Layout>} />
+      <Route path="/ForgotPassword" element={<Layout>< ForgotPassword/></Layout>} />
+      <Route path="/Signup" element={<Layout><Signup /></Layout>} />
+      </Routes>
+    </Router>
   );
-}
+};
+
 
 export default App;
