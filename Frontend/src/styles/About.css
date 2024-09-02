@@ -1,0 +1,82 @@
+/* Section Two - About */
+.section-two{
+  display: flex;
+  justify-content: center;
+}
+
+.about-us-box {
+  border: 2px solid #43f9f6;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 80%; /* Default width for better responsiveness */
+  max-width: 1200px; /* Maximum width */
+  margin: 0 auto; /* Center the box */
+  text-align: center;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(90deg, #7c4dff, #3efee8, rgb(236, 245, 69));
+  padding: 0 1rem; /* Padding for responsiveness */
+  box-sizing: border-box; /* Include padding and border in element's total width */
+  backdrop-filter: blur(50px);
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 1200px) {
+  .about-us-box {
+    width: 90%; /* Adjust width for larger screens */
+  }
+}
+
+@media (max-width: 992px) {
+  .about-us-box {
+    width: 95%; /* Adjust width for medium-sized screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .about-us-box {
+    width: 100%; /* Full width for smaller screens */
+    padding: 0.5rem; /* Reduced padding for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .about-us-box {
+    padding: 0.5rem; /* Further reduced padding for mobile screens */
+  }
+}
+
+.box-content {
+  display: flex;
+  flex-direction: column; /* Stack items vertically on small screens */
+  align-items: center;
+}
+
+.left-content {
+  width: 100%; /* Full width on smaller screens */
+  text-align: center;
+  padding-top: 2rem;
+  font-weight: bold;
+}
+
+.left-content p {
+  font-size: 2rem; /* Adjusted font size for responsiveness */
+}
+
+.left-content img {
+  width: 40px; /* Adjusted size for better fit */
+  height: 40px;
+}
+
+.right-content {
+  text-align: center; /* Center text on small screens */
+  width: 100%; /* Full width on smaller screens */
+  padding: 0 0 1rem 0; /* Adjusted padding */
+  line-height: 1rem;
+  font-weight: bold;
+}
+
+.right-content p {
+  margin-bottom: 10px;
+}

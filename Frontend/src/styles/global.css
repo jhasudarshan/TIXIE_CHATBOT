@@ -1,19 +1,17 @@
-/* src/styles/global.css */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 * {
+<<<<<<< HEAD
   font-family: 'Poppins', sans-serif;
   
+=======
+  font-family: "Poppins", sans-serif;
+>>>>>>> 3072e156d8a261aef2ef7bf9e20315d8a7643f4a
 }
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  color: #f5f5f5;
-}
-
-[class^="section"] {
-  background-color: rgba(0, 0, 0, 0.482);
-  backdrop-filter: blur(10px);
 }
