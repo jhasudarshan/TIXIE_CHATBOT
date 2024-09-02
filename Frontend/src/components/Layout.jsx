@@ -9,11 +9,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100vw;
-  background-image: url('/assets/bg.jpg'); /* Use absolute path */
-  background-size: cover;
-  background-position: center;
-  background-color: transparent; /* Ensure no conflicting background color */
+  
 `;
 
 // Box Styles
@@ -35,7 +31,7 @@ const Layout = ({ children }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (pathname.toLowerCase() === '/login' || pathname.toLowerCase() === '/signup') {
+    if (pathname.toLowerCase() === '/login' || pathname.toLowerCase() === '/signup' || pathname.toLowerCase()==='/forgotpassword') {
       document.body.classList.add('auth-background');
     } else {
       document.body.classList.remove('auth-background');
@@ -46,11 +42,11 @@ const Layout = ({ children }) => {
   }, [pathname]);
 
   return (
-    //<Container>
+    <Container>
       <Box>
         {children}
       </Box>
-    //</Container>
+    </Container>
   );
 };
 
