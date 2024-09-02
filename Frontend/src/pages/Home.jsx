@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import Chatbot from "./components/Chatbot";
-import AboutUsBox from "./components/AboutUsBox";
-import Footer from "./components/Footer";
-import "./styles/App.css"; // Import your CSS file here
+import Navbar from "../components/Navbar";
+import Chatbot from "../components/Chatbot";
+import AboutUsBox from "../components/AboutUsBox";
+import Footer from "../components/Footer";
+import "../styles/App.css";
 
-function App() {
+const Home = () => {  
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const videoRef = useRef(null);
 
@@ -38,8 +38,7 @@ function App() {
         <div className="homepage-container">
           <div className="left-container">
             <div className="homepage-text">
-              <h3>WELCOME</h3>
-              <h3>TO</h3>
+              <h3>WELCOME<br/>TO</h3>
               <h1>Tixie</h1>
               <h4>Book tickets seamlessly with AI</h4>
             </div>
@@ -61,6 +60,6 @@ function App() {
       <Footer />
     </>
   );
-}
+};
 
-export default App;
+export default Home; 
