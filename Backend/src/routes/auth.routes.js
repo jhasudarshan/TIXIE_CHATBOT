@@ -1,11 +1,11 @@
-const express = require("express");
+import express from 'express';
 const router = express.Router();
 
 
 //import
-const {login} = require("../controller/Auth");
-const {signup} = require("../controller/Auth");
-const {auth ,isStudent, isAdmin} = require("../middlewares/auth");
+const {login} = require("../controller/auth.controller");
+const {signup} = require("../controller/auth.controller");
+const {auth ,isUser } = require("../middleware/auth.middleware");
 
 
 router.post("/login",login);
@@ -24,19 +24,11 @@ router.get("/test", auth, (req,res) => {
 })
 
 
-// Protected Route for Student
-router.get("/student", auth, isStudent, (req, res) => {
+// Protected Route for User
+router.get("/user", auth, isUser, (req, res) => {
     res.json({
         success: true,
-        message: "Welcome to Protected Route for Student"
-    })
-});
-
-// Protected Route for Student
-router.get("/admin", auth, isAdmin, (req, res) => {
-    res.json({
-        success: true,
-        message: "Welcome to Protected Route for Admin"
+        message: "Welcome to Protected Route for User"
     })
 });
 

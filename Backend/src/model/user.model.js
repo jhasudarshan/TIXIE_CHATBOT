@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
+        unique: true,
         require: true,
         trim: true,
     },
@@ -15,11 +16,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    role: {
-        type: String,
-        enum: ["Admin", "Student", "Visitor"],
-        // enum means aapka role(Authorization) limit mai hoga Admin or Student or Visitor
-    },
+    bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Booking' }]
 });
 
 
