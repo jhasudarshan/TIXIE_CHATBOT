@@ -1,24 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
 * {
-  font-family: 'Poppins', sans-serif;
-  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  color: #f5f5f5;
 }
 
-[class^="section"] {
-  background-color: rgba(0, 0, 0, 0.482);
-  backdrop-filter: blur(10px);
-  /* border: solid 1px rgba(255, 255, 255, 0.381); */
+/* General section styling to cover full screen */
+.section-one {
+  margin-top: 2rem;
+  height: 100vh; /* Full viewport height */
+  width: 100vw;
+  display: flex; /* Flexbox for alignment */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
 }
 
-/* Navbar Styles */
+/* Optional: You may need to adjust the height in case of a different navbar size */
+@media (max-width: 768px) {
+  .section {
+    margin-top: 3rem; /* Adjust for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    margin-top: 2rem; /* Further adjustment for very small screens */
+  }
+}
+
+.video-container {
+  position: fixed; /* Keeps the video fixed in the background */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  z-index: -1; /* Places the video behind all other content */
+  overflow: hidden; /* Prevents overflow */
+}
+
+.video-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  backdrop-filter: blur(5px); /* Apply blur effect to the background */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  background-color: rgba(0, 0, 0, 0.5); /* 50% black background */
+  z-index: 1; /* Ensures the blur layer is above the video */
+}
+
+/* Video styles to ensure it covers the container properly */
+.video-container video {
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  object-fit: cover; /* Ensures the video covers the container without stretching */
+  position: relative; /* Positions the video correctly within the container */
+  z-index: -1; /* Places the video under the blur effect */
+}
+
 .navbar {
   position: fixed;
   top: 0;
@@ -40,12 +87,13 @@ body, html {
   background-color: rgba(0, 0, 0, 0.505);
   border: 1px solid #ffffff;
   border-radius: 20px;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 1rem 2rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.575);
+  margin-right: 2rem;
 }
 
 .navbar-brand {
-  padding: 0 2rem 0 2rem;
+  padding: 0 2rem;
   font-size: 1.5rem;
   font-weight: bold;
   color: #ffffff;
@@ -53,167 +101,99 @@ body, html {
 }
 
 .navbar-links {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.navbar-links li {
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-.navbar-links a {
+.navbar-link {
   font-size: large;
   color: #ffffff;
   text-decoration: none;
+  margin: 0 10px;
   transition: color 0.2s ease;
 }
 
-.navbar-links a:hover {
+.navbar-link:hover {
   color: #ffffff7a;
-}
-
-.login-btn {
-  background-color: #35b41c;
-  color: #000000;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.2s ease;
-}
-
-.login-btn:hover {
-  background-color: #2b7610;
 }
 
 /* Media queries for responsiveness */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem;
   }
-  .navbar-links {
-    flex-direction: column;
-    align-items: center;
-  }
-  .navbar-links li {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
+
   .navbar-container {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    margin-right: 1rem;
+    width: auto;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-links {
+    flex-direction: row;
+    margin-top: 0;
+    justify-content: center;
+  }
+
+  .navbar-link {
+    margin: 0 5px;
+    font-size: medium;
   }
 }
 
-/* Section Styles */
-.section {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw; /* changed from 218vh to 100vw for responsiveness */
-  padding-top: 60px;
-}
-
-/* For screens with a maximum width of 1200px */
-@media (max-width: 1200px) {
-  .section {
-    width: 90vw; /* adjust width for larger screens */
-  }
-}
-
-/* For screens with a maximum width of 992px */
-@media (max-width: 992px) {
-  .section {
-    width: 80vw; /* adjust width for medium-sized screens */
-  }
-}
-
-/* For screens with a maximum width of 768px */
-@media (max-width: 768px) {
-  .section {
-    width: 70vw; /* adjust width for smaller screens */
-    padding-top: 40px; /* adjust padding for smaller screens */
-  }
-}
-
-/* For screens with a maximum width of 480px */
 @media (max-width: 480px) {
-  .section {
-    width: 90vw; /* adjust width for mobile screens */
-    padding-top: 20px; /* adjust padding for mobile screens */
+  .navbar-brand {
+    font-size: 1rem;
+  }
+
+  .navbar-link {
+    font-size: small;
+  }
+
+  .navbar-container {
+    padding: 0.5rem;
+    margin-right: 1rem;
   }
 }
 
-/* Video Container Styles */
-.video-container {
-  width: 105%;
-  height: 105%;
-  overflow: hidden;
+/* Container for homepage content */
+.homepage-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  width: 80%;
+  max-width: 1200px; /* Limit width for larger screens */
+  margin: 0 auto; /* Center container horizontally */
+  padding: 1rem; /* Padding for responsiveness */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
 }
 
-/* Overlay Styles */
-.background-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  transform: translate(-50%, -50%);
-  filter: blur(6px);
+/* Ensure left and right containers take equal width */
+.left-container,
+.right-container {
+  flex: 1; /* Equal flex basis */
 }
 
-/* .video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 101%;
-  background: rgba(0, 0, 0, 0.413);
-} */
-
-.overlay-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-/* Overlay Text Styles */
-.overlay-text {
-  position: absolute;
-  top: 50%;
-  left: 10%;
-  transform: translateY(-50%);
-  color: #f5f5f5;
-  text-align: left;
-}
-
-.overlay-text h1 {
+.homepage-text h3 {
   font-size: 3rem;
-  margin: 0;
   background: linear-gradient(45deg, #7c4dff, #3efee8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.overlay-text h2 {
-  font-size: 8rem;
-  font-weight: bolder;
-  margin: 0;
+.homepage-text h1 {
+  font-size: 6rem;
   background: linear-gradient(
     90deg,
     #7c4dff 0%,
@@ -228,83 +208,129 @@ body, html {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 700% 100%;
-  animation: gradientScroll 70s linear infinite;
+  animation: gradientScroll 50s linear infinite;
 }
 
-.overlay-text h3 {
-  font-size: 2rem;
-  margin: 0;
+@keyframes gradientScroll {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: -700% 50%;
+  }
+}
+
+.homepage-text h4 {
+  font-size: 1.5rem;
   background: linear-gradient(45deg, #7c4dff, #3efee8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-@keyframes gradientScroll {
-  0% { background-position: 0% 50%; }
-  100% { background-position: -700% 50%; }
+/* Homepage text styling */
+.homepage-text {
+  align-items: left; /* Center text horizontally */
 }
 
-/* Chatbot Button Styles */
+/* Button styling */
 .chatbot-button {
-  position: absolute;
-  right: 15%;
-  top: 50%;
+  display: block;
+  margin: 0 auto; /* Center button horizontally */
   transform: translateY(-50%);
-  background-image: linear-gradient(90deg, #7c4dff3f, #3efee82f, rgba(236, 245, 69, 0.217));
-  border: 6px solid;
-  padding: 1.5rem;
+  background-image: linear-gradient(
+    90deg,
+    #7c4dff2c,
+    #3efee820,
+    rgba(236, 245, 69, 0.128)
+  );
+  border: 5px solid;
   font-size: 2rem;
   color: #f5f5f5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
   outline: none;
   border-image: linear-gradient(90deg, #7c4dff, #3efee8, rgb(236, 245, 69));
   border-image-slice: 1;
   transition: background-color 0.2s ease-in-out;
+  border-radius: 0;
 }
 
 .chatbot-button:hover {
   background-color: rgba(255, 255, 255, 0.144);
 }
 
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .homepage-container {
+    flex-direction: column; /* Stack items vertically on small screens */
+    height: auto; /* Allow height to adjust for smaller screens */
+  }
+
+  .left-container,
+  .right-container {
+    width: 100%; /* Full width on small screens */
+    text-align: center; /* Center text in containers */
+  }
+
+  .homepage-text {
+    font-size: smaller; /* Adjust font size for smaller screens */
+  }
+
+  .chatbot-button {
+    margin-top: 1rem; /* Space between elements on smaller screens */
+    border: 2px solid;
+    border-image: linear-gradient(90deg, #7c4dff, #3efee8, rgb(236, 245, 69));
+    border-image-slice: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .homepage-text {
+    font-size: x-small; /* Further reduce font size */
+  }
+
+  .chatbot-button {
+    font-size: small; /* Adjust button font size */
+  }
+}
+
+/* src/styles/chatbot.css */
 .chatbot-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Darker background */
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column; /* Add this to stack elements vertically */
-  padding: 0; /* Remove any padding */
-  margin: 0; /* Remove any margin */
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
   z-index: 2000;
 }
 
 .chatbot-header {
-  background-color: #444; /* Darker header background */
+  background-color: #444;
   color: #fff;
   padding: 10px;
   text-align: center;
-  border-bottom: 1px solid #555; /* Darker border */
-  width: 100%; /* Make sure the header takes full width */
-  display: flex; /* Add this to enable flexbox */
-  justify-content: space-between; /* Add this to space out the h2 and close button */
-  align-items: center; /* Add this to vertically center the h2 and close button */
+  border-bottom: 1px solid #555;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.chatbot-header h2{
+.chatbot-header h2 {
   width: max-content;
-  margin: 0; /* Remove any margin */
-  color: #ccc; /* Lighter text color */
+  margin: 0;
+  color: #ccc;
+  padding-left: 1rem;
 }
 
 .chatbot-header .close-button {
-  background-color: #444; /* Darker button background */
+  background-color: #444;
   color: #fff;
   border: none;
   padding: 10px;
@@ -314,166 +340,174 @@ body, html {
 
 .chatbot-chat {
   padding: 20px;
-  background-color: #333; /* Darker chat background */
-  height: calc(100vh - 120px); /* Set the height to full viewport height minus header and footer height */
-  overflow-y: auto; /* Allow scrolling if content overflows */
-  width: 100%; /* Make sure the chat area takes full width */
+  background-color: #333;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+  width: 100%;
 }
 
+.chatbot-messages {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Default styles for messages */
+.message {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+/* User message */
+.message.user {
+  align-self: flex-end;
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+/* Bot message */
+.message.bot {
+  align-self: flex-start;
+  background-color: #e0e0e0;
+  color: #000000;
+}
+
+/* Media queries for desktop screens */
+@media (min-width: 769px) {
+  .message.user {
+    margin-right: 20rem; /* Margin on the right for user messages on desktop */
+    max-width: 40rem;
+  }
+
+  .message.bot {
+    margin-left: 20rem; /* Margin on the left for bot messages on desktop */
+    max-width: 40rem;
+  }
+
+  .chatbot-footer input[type="text"] {
+    max-width: 55%;
+  }
+
+}
+
+
 .chatbot-footer {
-  background-color: #333; /* Darker footer background */
-  padding: 10px;
-  border-top: 1px solid #444; /* Darker border */
-  width: 100%; /* Make sure the footer takes full width */
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid #dddddd;
+  background-color: #000000;
+  width: 100%;
+  justify-content: center; 
+  box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .chatbot-footer input[type="text"] {
-  width: 80%;
-  padding: 10px;
-  border: 1px solid #555; /* Darker border */
-  border-radius: 5px;
-  background-color: #444; /* Darker input background */
-  color: #fff;
-}
-
-.chatbot-footer button[type="button"] {
-  width: 20%;
+  flex: 1; /* Take remaining space */
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #555; /* Darker button background */
+  background-color: #fcfcfcac;
+  color: #000000;
+}
+
+.chatbot-footer input[type="text"]
+
+.chatbot-footer button {
+  background-color: #444;
   color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.message.user {
-  margin-left: auto;
-  margin-right: 20vw;
-  text-align: right;
-  color: #fff;
-  border: solid 1px white;
-  border-radius: 5px;
-  width: max-content;
-  padding: 10px;
+
+/* Section Two - About */
+.section-two{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5rem;
+  padding-top: 5rem;
 }
-
-.message.bot {
-  margin-right: auto;
-  margin-left: 20vw;
-  text-align: left;
-  color: #ccc;
-  border: solid 1px white;
-  width: max-content;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-
-/* Responsive Styles */
-@media (max-width: 1200px) {
-  .overlay-text h1 { font-size: 3rem; }
-  .overlay-text h2 { font-size: 10rem; }
-  .chatbot-button { font-size: 1.75rem; padding: 1.25rem; }
-}
-
-@media (max-width: 992px) {
-  .overlay-text h1 { font-size: 2.5rem; }
-  .overlay-text h2 { font-size: 8rem; }
-  .chatbot-button { font-size: 1.5rem; padding: 1rem; }
-}
-
-@media (max-width: 768px) {
-  .overlay-text h1 { font-size: 2rem; }
-  .overlay-text h2 { font-size: 6rem; }
-  .chatbot-button { font-size: 1.25rem; padding: 0.75rem; }
-}
-
-@media (max-width: 480px) {
-  .overlay-text h1 { font-size: 1.5rem; }
-  .overlay-text h2 { font-size: 4rem; }
-  .chatbot-button { font-size: 1rem; padding: 0.5rem; }
-}
-
 
 .about-us-box {
-  background-color: #ffffff87;
   border: 2px solid #43f9f6;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 70%;
-  margin: 0 auto;
+  width: 80%; /* Default width for better responsiveness */
+  max-width: 1200px; /* Maximum width */
+  margin: 0 auto; /* Center the box */
   text-align: center;
-  padding: 0 50px 0 50px;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-image: linear-gradient(90deg, #7c4dff, #3efee8, rgb(236, 245, 69));
+  padding: 0 1rem; /* Padding for responsiveness */
+  box-sizing: border-box; /* Include padding and border in element's total width */
+  backdrop-filter: blur(50px);
 }
 
-/* Add media queries for responsiveness */
+/* Media queries for responsiveness */
 @media (max-width: 1200px) {
   .about-us-box {
-    width: 80%; /* Adjust width for larger screens */
+    width: 90%; /* Adjust width for larger screens */
   }
 }
 
 @media (max-width: 992px) {
   .about-us-box {
-    width: 90%; /* Adjust width for medium-sized screens */
+    width: 95%; /* Adjust width for medium-sized screens */
   }
 }
 
 @media (max-width: 768px) {
   .about-us-box {
-    width: 95%; /* Adjust width for smaller screens */
+    width: 100%; /* Full width for smaller screens */
+    padding: 0.5rem; /* Reduced padding for smaller screens */
   }
 }
 
 @media (max-width: 480px) {
   .about-us-box {
-    width: 100%; /* Adjust width for mobile screens */
-    padding: 10px; /* Reduced padding for mobile screens */
+    padding: 0.5rem; /* Further reduced padding for mobile screens */
   }
 }
 
 .box-content {
   display: flex;
+  flex-direction: column; /* Stack items vertically on small screens */
   align-items: center;
 }
 
 .left-content {
-  width: 30%;
+  width: 100%; /* Full width on smaller screens */
   text-align: center;
+  padding-top: 2rem;
 }
 
-.left-content p{
-  font-size: 4rem;
+.left-content p {
+  font-size: 2rem; /* Adjusted font size for responsiveness */
 }
 
 .left-content img {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 10px;
-}
-
-.vertical-line {
-  width: 1px;
-  height: 45vh;
-  background-color: #ddd; /* Changed to #ddd */
-  margin: 0 50px 10px 0;
+  width: 40px; /* Adjusted size for better fit */
+  height: 40px;
 }
 
 .right-content {
-  text-align: left;
-  width: 70%;
-  padding: 10px 0 30px 0;
+  text-align: center; /* Center text on small screens */
+  width: 100%; /* Full width on smaller screens */
+  padding: 0 0 1rem 0; /* Adjusted padding */
+  line-height: 1rem;
 }
 
 .right-content p {
   margin-bottom: 10px;
 }
 
-/* Footer Styles */
 
 .footer {
   color: #fff;
@@ -483,7 +517,7 @@ body, html {
 }
 
 .footer-three {
-  background-color: rgba(0, 0, 0, 0.696);
+  background-color: rgba(0, 0, 0, 0.482);
 }
 
 .footer-container {
