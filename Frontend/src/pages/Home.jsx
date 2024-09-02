@@ -38,8 +38,7 @@ const Home = () => {
         <div className="homepage-container">
           <div className="left-container">
             <div className="homepage-text">
-              <h3>WELCOME</h3>
-              <h3>TO</h3>
+              <h3>WELCOME<br/>TO</h3>
               <h1>Tixie</h1>
               <h4>Book tickets seamlessly with AI</h4>
             </div>
