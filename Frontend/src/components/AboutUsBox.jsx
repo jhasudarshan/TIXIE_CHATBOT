@@ -3,7 +3,7 @@ import React from 'react';
 function AboutUsBox() {
   return (
     <div className="about-us-box">
-      <h2>Why use Tixie?</h2>
+      <h2>Why to use our Tixie chatbot?</h2>
       <hr />
       <div className="box-content">
         <div className="left-content">
