@@ -1,12 +1,6 @@
-const bcrypt = require("bcrypt");
-const User = require("../model/User");
-
-// import jwt token
-const jwt = require("jsonwebtoken");
-
-
-require("dotenv").config();
-
+import bcrypt from 'bcrypt';
+import User from '../model/user.model.js'
+import jwt from 'jsonwebtoken';
 
 // Sign up route handler
 exports.signup = async (req, res) => {

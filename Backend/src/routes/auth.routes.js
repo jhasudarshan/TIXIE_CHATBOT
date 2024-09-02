@@ -1,8 +1,10 @@
-const express = require("express");
-const router = express.Router();
+import { Router } from "express";
+
+const router = Router();
 
 
 //import
+import 
 const {login} = require("../controller/Auth");
 const {signup} = require("../controller/Auth");
 const {auth ,isStudent, isAdmin} = require("../middlewares/auth");
@@ -41,5 +43,4 @@ router.get("/admin", auth, isAdmin, (req, res) => {
 });
 
 
-
-module.exports = router;
+export default router;
