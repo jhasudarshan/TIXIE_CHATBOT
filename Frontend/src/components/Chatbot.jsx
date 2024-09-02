@@ -10,7 +10,7 @@ function Chatbot({ onClose }) {
       setChatMessages(prevMessages => [
         ...prevMessages,
         { type: "user", text: userInput },
-        { type: "bot", text: "This is reply" },
+        { type: "bot", text: "This is a reply" },
       ]);
       document.getElementById("chatbot-input").value = "";
     }
