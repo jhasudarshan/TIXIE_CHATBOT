@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import express from 'express';
 const router = express.Router();
 
@@ -6,6 +7,18 @@ const router = express.Router();
 const {login} = require("../controller/auth.controller");
 const {signup} = require("../controller/auth.controller");
 const {auth ,isUser } = require("../middleware/auth.middleware");
+=======
+import { Router } from "express";
+
+const router = Router();
+
+
+//import
+import 
+const {login} = require("../controller/Auth");
+const {signup} = require("../controller/Auth");
+const {auth ,isStudent, isAdmin} = require("../middlewares/auth");
+>>>>>>> 3c937e3100716448b2422a71333a1b69d0ceda3a
 
 
 router.post("/login",login);
@@ -33,5 +46,4 @@ router.get("/user", auth, isUser, (req, res) => {
 });
 
 
-
-module.exports = router;
+export default router;
