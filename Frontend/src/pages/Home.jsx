@@ -1,72 +1,66 @@
-import { useState } from "react";
-import{Link} from 'react-router-dom';
-import Navbar from "../components/Navbar";
-import OverlayText from "../components/OverlayText";
-import Chatbot from "../components/Chatbot";
-import AboutUsBox from "../components/AboutUsBox";
-import '../styles/App.css';
-function Home() {
-    const [isChatbotOpen, setIsChatbotOpen] = useState(false);
-  
-    const handleOpenChatbot = () => {
-      setIsChatbotOpen(true);
-    };
-  
-    const handleCloseChatbot = () => {
-      setIsChatbotOpen(false);
-    };
-  
-    return (
-      
-      <>
-        <video
-          className="background-video-fixed"
-          autoPlay
-          muted
-          loop
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: -1000,
-          }}
-        >
+import React, { useState, useRef, useEffect } from "react";
+import Navbar from "./components/Navbar";
+import Chatbot from "./components/Chatbot";
+import AboutUsBox from "./components/AboutUsBox";
+import Footer from "./components/Footer";
+import "./styles/App.css"; // Import your CSS file here
+
+function App() {
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+  const videoRef = useRef(null);
+
+  const handleOpenChatbot = () => {
+    setIsChatbotOpen(true);
+  };
+
+  const handleCloseChatbot = () => {
+    setIsChatbotOpen(false);
+  };
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  }, []);
+
+  return (
+    <>
+      <div className="video-container">
+        <video ref={videoRef} loop muted>
           <source src="/videoplayback.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-  
-        <Navbar />
-  
-        <section id="home" className="section section-one">
-          <OverlayText />
-          <button className="chatbot-button" onClick={handleOpenChatbot}>
-            Open Chatbot
-          </button>
-        </section>
-  
-        {isChatbotOpen && (
-          <Chatbot onClose={handleCloseChatbot} />
-        )}
-  
-        <section id="about" className="section section-two">
-          <AboutUsBox />
-        </section>
-  
-        <footer id="contact" className="footer footer-three">
-          <div className="footer-container">
-            <p className="text-center">Some text in the center</p>
-            <div className="d-flex justify-content-center">
-              <a href="#about" className="mx-2">About</a>
-              <a href="#contact" className="mx-2">Contact</a>
-              <Link to="./Login">Login</Link>
+      </div>
+
+      <Navbar />
+
+      <section id="home" className="section section-one">
+        <div className="homepage-container">
+          <div className="left-container">
+            <div className="homepage-text">
+              <h3>WELCOME</h3>
+              <h3>TO</h3>
+              <h1>Tixie</h1>
+              <h4>Book tickets seamlessly with AI</h4>
             </div>
-            <p className="text-center mt-2">&copy; Made with love by Team Botcoders</p>
           </div>
-        </footer>
-      </>
-    );
-  }
-  export default Home;
+          <div className="right-container">
+            <button className="chatbot-button" onClick={handleOpenChatbot}>
+              Open Chatbot
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {isChatbotOpen && <Chatbot onClose={handleCloseChatbot} />}
+
+      <section id="about" className="section section-two">
+        <AboutUsBox />
+      </section>
+
+      <Footer />
+    </>
+  );
+}
+
+export default App;
