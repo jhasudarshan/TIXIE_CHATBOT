@@ -5,10 +5,9 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand">Tixie</div>
-      <div className="navbar-brand">Tixie</div>
       <div className="navbar-container">
         <div className="navbar-links">
-        <a href="#" className="navbar-link">Home</a>
+          <a href="#" className="navbar-link">Home</a>
           <a href="#" className="navbar-link">About</a>
           <a href="#" className="navbar-link">Contact Us</a>
           <Link to="/login" className="navbar-link">Login</Link>
