@@ -1,12 +1,9 @@
 // auth, isStudent, isAdmin
-
-const jwt = require("jsonwebtoken")
-require("dotenv").config();
-
+import jwt from 'jsonwebtoken';
 
 // next ka use isliye karte hai ki agar ye wala middleware nhi hua toh next middleware ko check karega
 // check authentication
-exports.auth = (req, res, next) => {
+const auth = (req, res, next) => {
     
     try {
         //const token = req.body.token;
@@ -48,7 +45,7 @@ exports.auth = (req, res, next) => {
 }
 
 // check authorization
-exports.isStudent = (req, res, next) => {
+const isStudent = (req, res, next) => {
     try {
         if (req.user.role !== "Student") {
             return res.status(401).json({
@@ -66,7 +63,7 @@ exports.isStudent = (req, res, next) => {
     }
 }
 
-exports.isAdmin = (req, res, next) => {
+const isAdmin = (req, res, next) => {
     try {
         if (req.user.role !== "Admin") {
             return res.status(401).json({
@@ -82,4 +79,10 @@ exports.isAdmin = (req, res, next) => {
             message: "User Role is not Matching"
         })
     }
+}
+
+exports = {
+    auth,
+    isStudent,
+    isAdmin
 }

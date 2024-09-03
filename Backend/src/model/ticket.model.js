@@ -6,4 +6,6 @@ const TicketSchema = new mongoose.Schema({
   available: Boolean
 });
 
-module.exports = mongoose.model('Ticket', TicketSchema);
+const Ticket = mongoose.model('Ticket', TicketSchema);
+
+export default Ticket;

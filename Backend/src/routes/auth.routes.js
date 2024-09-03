@@ -1,13 +1,8 @@
 import { Router } from "express";
+import { login, signup  } from '../controller/auth.controller.js';
 
 const router = Router();
 
-
-//import
-import 
-const {login} = require("../controller/Auth");
-const {signup} = require("../controller/Auth");
-const {auth ,isStudent, isAdmin} = require("../middlewares/auth");
 
 
 router.post("/login",login);
