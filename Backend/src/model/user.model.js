@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -20,21 +20,6 @@ const userSchema = new mongoose.Schema({
 });
 
 
+const User = mongoose.model("User", userSchema);
 
-
-
-//  by sudarshan
-// const mongoose = require('mongoose');
-
-// const UserSchema = new mongoose.Schema({
-//   name: String,
-//   email: { type: String, unique: true },
-//   bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Booking' }]
-// });
-
-// module.exports = mongoose.model('User', UserSchema);
-
-
-
-
-module.exports = mongoose.model("User", userSchema);
+export default User;

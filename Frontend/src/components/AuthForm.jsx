@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 const Form = styled.form`
   display: flex;
   flex-direction: column;
- 
   padding: 20px;
   border-radius: 8px;
+  
 `;
 
 const Input = styled.input`
@@ -54,7 +54,7 @@ const SwitchLink = styled.div`
 
 const OptionsContainer = styled.div`
   display: flex;
-  justify-content: space-between; /* Ensures horizontal alignment with space between */
+  justify-content: space-between; /* Ensures horizontal alignment with space between 
   align-items: center;
   margin-bottom: 20px;
 `;

@@ -3,7 +3,7 @@ import User from '../model/user.model.js'
 import jwt from 'jsonwebtoken';
 
 // Sign up route handler
-exports.signup = async (req, res) => {
+const signup = async (req, res) => {
     try {
         // get data
         const { name, email, password, role } = req.body;
@@ -53,7 +53,7 @@ exports.signup = async (req, res) => {
 
 
 // Login
-exports.login = async (req,res) => {
+const login = async (req,res) => {
     try
     {
         const {email,password} = req.body;
@@ -125,4 +125,9 @@ exports.login = async (req,res) => {
             message : 'Login Faluire'
         })
     }
+}
+
+exports ={
+    signup,
+    login
 }

@@ -7,9 +7,9 @@ function Navbar() {
       <div className="navbar-brand">Tixie</div>
       <div className="navbar-container">
         <div className="navbar-links">
-          <Link to="/" className="navbar-link">Home</Link>
-          <Link to="/about" className="navbar-link">About</Link>
-          <Link to="/contact" className="navbar-link">Contact Us</Link>
+          <a href="#" className="navbar-link">Home</a>
+          <a href="#about" className="navbar-link">About</a>
+          <a href="#" className="navbar-link">Contact Us</a>
           <Link to="/login" className="navbar-link">Login</Link>
         </div>
       </div>
