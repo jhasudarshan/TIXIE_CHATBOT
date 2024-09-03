@@ -1,9 +1,11 @@
 import pickle
 import sys
 import json
-
+import os
 # Load everything from the pickle file
-with open('model_data1.pkl', 'rb') as model_file:
+file_path = os.path.join('ChatBot', 'model_data1.pkl')
+
+with open(file_path, 'rb') as model_file:
     model_data = pickle.load(model_file)
 
 # Extract the components from the loaded data
@@ -25,7 +27,8 @@ def predict_intent(message):
 
 def get_response(intent):
     # Load the JSON data to find responses (assuming the JSON file is still available)
-    with open('meuseum1.json', 'r') as f:
+    file_path = os.path.join('ChatBot', 'meuseum1.json')
+    with open(file_path, 'r') as f:
         data = json.load(f)
 
     # Find a response for the predicted intent

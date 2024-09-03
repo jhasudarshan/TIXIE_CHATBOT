@@ -1,9 +1,12 @@
 // chatbot.js
 import { exec } from 'child_process';
+import path from 'path';
+import {__dirname } from '../../app.js'
 
 const getIntentFromMessage = async(message) => {
+  const pythonScriptPath = path.join(__dirname, 'ChatBot', 'nlp_model.py');
   return new Promise((resolve, reject) => {
-    exec(`python ChatBot/nlp_model.py`, (error, stdout, stderr) => {
+    exec(`python ChatBot/nlp_model.py ${message}`, (error, stdout, stderr) => {
       if (error) {
         return reject(error);
       }
