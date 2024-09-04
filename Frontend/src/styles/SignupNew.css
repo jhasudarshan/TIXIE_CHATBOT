@@ -1,11 +1,11 @@
 /* Overlay and Popup Window Styles */
-.signup-overlay {
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(255, 255, 255, 0.151); /* Dark overlay with 70% opacity */
+  background: rgba(255, 255, 255, 0.151); /* Dark overlay with slight opacity */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +16,7 @@
   display: flex;
   width: 65%;
   height: 80%;
-  background-color: rgb(24, 24, 24); /* Dark background */
+  background-color: rgb(0, 0, 0); /* Dark background */
   color: #f5f5f5;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -39,72 +39,63 @@
 /* Left and Right Section Styles */
 .signup-left-section,
 .signup-right-section {
-  flex: 1; /* Equal width for both sections */
+  flex: 1;
   display: flex;
-  flex-direction: column; /* Column layout for content */
-  justify-content: center; /* Center content vertically */
-  align-items: center; /* Center content horizontally */
-  padding: 40px; /* Consistent padding for both sections */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
 }
 
-/* Left Section Additional Styling */
-.signup-left-section img {
-  max-width: 80%; /* Responsive image width */
-  max-height: 80%; /* Responsive image height */
-  border-radius: 8px; /* Optional: rounded corners for image */
+/* Left Section Video Styling */
+.signup-left-section video {
+  max-width: 100%;
+  border-radius: 8px;
 }
 
-/* Right Section Styling */
+/* Right Section Title Styling */
 .signup-right-section h2 {
   text-align: center;
-  font-size: 2rem; /* Increased font size */
-  margin-bottom: 20px; /* Margin below title */
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
+/* Form Styling */
 .signup-right-section form {
   width: 25vw;
   display: flex;
-  flex-direction: column; /* Align items in a column */
-  align-items: center; /* Center form elements horizontally */
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Input Group Styles */
+/* Input Group Styling */
 .signup-input-group {
-  margin-bottom: 25px; /* Increased margin */
-  width: 100%; /* Ensure the input group takes full width of its container */
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .signup-input-group input {
   width: 100%;
-  padding: 15px; /* Increased padding */
-  font-size: 1.1rem; /* Increased font size */
+  padding: 15px;
+  font-size: 1.1rem;
   border: none;
   border-radius: 5px;
-  background-color: #333; /* Dark input background */
-  color: #f5f5f5; /* Light text color */
-  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  background-color: #333;
+  color: #f5f5f5;
+  box-sizing: border-box;
 }
 
 .signup-input-group input::placeholder {
-  color: #bbb; /* Lighter placeholder color */
-  font-size: 1rem; /* Increased placeholder font size */
+  color: #bbb;
+  font-size: 1rem;
 }
 
-/* Options Container Styles */
-.signup-options-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px; /* Increased margin */
-  font-size: 1.1rem; /* Increased font size */
-}
-
-/* Signup Button Styles */
+/* Signup Button Styling */
 .signup-button {
   width: 100%;
-  padding: 15px; /* Increased padding */
-  font-size: 1.2rem; /* Increased font size */
-  background-color: #0066cc; /* Darker blue button */
+  padding: 15px;
+  font-size: 1.2rem;
+  background-color: #0066cc;
   border: none;
   border-radius: 5px;
   color: #f5f5f5;
@@ -113,72 +104,70 @@
 }
 
 .signup-button:hover {
-  background-color: #004d99; /* Even darker blue on hover */
-}
-
-/* Updated Login Link Styles */
-.signup-login-link {
-  margin-top: auto; /* Push the link to the bottom */
-  text-align: center;
-  font-size: 1.1rem; /* Consistent font size */
+  background-color: #004d99;
 }
 
 /* Login Link Styling */
-.signup-login-link a {
-  color: #00aaff; /* Light blue color for links */
+.login-link {
+  margin-top: auto;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.login-link a {
+  color: #00aaff;
   text-decoration: none;
-  font-size: 1.1rem; /* Increased font size */
   transition: color 0.3s;
 }
 
-.signup-login-link a:hover {
-  color: #66ccff; /* Lighter blue on hover */
+.login-link a:hover {
+  color: #66ccff;
 }
 
-/* Close Button Styles */
-.signup-popup-window .close-button {
+/* Close Button Styling */
+.close-button {
   position: absolute;
   top: 10px;
   right: 10px;
   border: none;
   background: transparent;
   font-size: 1.5rem;
-  color: #f5f5f5; /* Light color for close button */
+  color: #f5f5f5;
   cursor: pointer;
 }
 
-/* Responsive Styles for Smaller Screens */
+/* Responsive Styles */
 @media (max-width: 768px) {
   .signup-popup-window {
-    flex-direction: column; /* Stack sections vertically */
-    width: 90%; /* Full width for mobile */
-    height: auto; /* Adjust height for content */
+    flex-direction: column;
+    width: 90%;
+    height: auto;
   }
 
   .signup-left-section,
   .signup-right-section {
-    padding: 20px; /* Reduce padding for smaller screens */
+    padding: 20px;
   }
 
   .signup-right-section form {
-    width: 80vw; /* Wider form for mobile */
+    width: 80vw;
   }
 
   .signup-right-section h2 {
-    font-size: 1.5rem; /* Smaller font size for title */
+    font-size: 1.5rem;
   }
 
   .signup-input-group input {
-    font-size: 1rem; /* Smaller font size for input */
-    padding: 10px; /* Reduce padding for inputs */
+    font-size: 1rem;
+    padding: 10px;
   }
 
   .signup-button {
-    font-size: 1rem; /* Smaller font size for button */
-    padding: 10px; /* Reduce padding for button */
+    font-size: 1rem;
+    padding: 10px;
   }
 
-  .signup-login-link {
-    font-size: 1rem; /* Smaller font size for link */
+  .login-link {
+    font-size: 1rem;
   }
 }
