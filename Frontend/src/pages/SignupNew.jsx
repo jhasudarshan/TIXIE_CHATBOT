@@ -16,10 +16,10 @@ function SignupPage({ onClose, onSwitch }) {
           <h2>Sign Up</h2>
           <form>
             <div className="signup-input-group">
-              <input type="email" placeholder="Email" />
+              <input type="text" placeholder="Username" />
             </div>
             <div className="signup-input-group">
-              <input type="text" placeholder="Username" />
+              <input type="email" placeholder="Email" />
             </div>
             <div className="signup-input-group">
               <input type="password" placeholder="Password" />
