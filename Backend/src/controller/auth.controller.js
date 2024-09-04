@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 // Sign up route handler
 const signup = async (req, res) => {
     // get data
-    const { name, email, password, phoneNumber } = req.body;
+    const { name, email, password } = req.body;
     try {
 
         // check if user already exist 
@@ -37,8 +37,7 @@ const signup = async (req, res) => {
         const newUser = await User.create({
             name,
             email,
-            password: hashedPassword,
-            phoneNumber 
+            password: hashedPassword, 
         });
 
         // Save the new user in the database

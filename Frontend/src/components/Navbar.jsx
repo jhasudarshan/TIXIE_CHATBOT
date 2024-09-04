@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
+import LoginPage from '../pages/Login';
+import SignupPage from '../pages/Signup';
+=======
+import { Link } from "react-router-dom";
 import LoginPage from '../pages/LoginNew';
 import SignupPage from '../pages/SignupNew';
+import logo from '../assets/logo-no-background.svg';
+>>>>>>> 24c2db6f421f7bb38a455f32701f5624309b0a95
 
 function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
@@ -9,9 +16,9 @@ function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const navbarContainer = document.querySelector('.navbar-container');
-      const opacityValue = 1 - window.scrollY / 800;
+      const opacityValue = 1 - window.scrollY / 200;
   
-      if (window.scrollY > 800) {
+      if (window.scrollY > 200) {
         navbarContainer.style.opacity = '0';
       } else {
         navbarContainer.style.opacity = opacityValue.toString();
@@ -29,7 +36,11 @@ function Navbar() {
   return (
     <>
       <nav className="navbar">
-        <div className="navbar-brand">Tixie</div>
+      <div className="logo-container">
+        <img src={logo} alt="Logo" className="logo" />
+      </div>
+
+
         <div className="navbar-container">
           <div className="navbar-links">
             <a href="#" className="navbar-link">Home</a>
