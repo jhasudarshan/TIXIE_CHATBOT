@@ -3,14 +3,13 @@ import { useAuthContext } from "../context/AuthContext.jsx";
 import axios from "axios";
 import host_url from '../constant.js';
 
-
 const useSignup = () => {
-    const [ loading, setLoading ] = useState(false);
+    const [loading, setLoading] = useState(false);
     const { setAuthUser } = useAuthContext();
 
     const signup = async ({ name, email, password, confirmPassword }) => {
-        const success = handleInputErrors({ name, email, password, confirmPassword});
-        if( !success){
+        const success = handleInputErrors({ name, email, password, confirmPassword });
+        if (!success) {
             return;
         }
         setLoading(true);
@@ -24,9 +23,8 @@ const useSignup = () => {
                 headers: { "Content-Type": "application/json" }
             });
 
-            const data = await res.data; // Ensure you get the correct data
+            const data = await res.data;
 
-            // Assuming res.data contains a 'token' and other user data
             console.log("API Response:", data);
 
             if (data.error) {
@@ -35,33 +33,37 @@ const useSignup = () => {
 
             localStorage.setItem("chat-user", JSON.stringify(data));
             await setAuthUser(data);
-            alert(`Signup Successfull`);
+            alert('Signup successful');
+
+            // Refresh the page after successful signup
+            window.location.reload();
+
         } catch (error) {
             alert(error.message);
         } finally {
-            setLoading(false);   
+            setLoading(false);
         }
     };
-    
+
     return { loading, signup };
 }
 
-function handleInputErrors({ name, email, password, confirmPassword}) {
-    if (!name || !email || !password || !confirmPassword ) {
-		alert("all fields are required");
-		return false;
-	}
+function handleInputErrors({ name, email, password, confirmPassword }) {
+    if (!name || !email || !password || !confirmPassword) {
+        alert("All fields are required");
+        return false;
+    }
 
-	if (password !== confirmPassword) {
-		alert("Passwords do not match");
-		return false;
-	}
+    if (password !== confirmPassword) {
+        alert("Passwords do not match");
+        return false;
+    }
 
-	if (password.length < 6) {
-		alert("Password must be at least 6 characters");
-		return false;
-	}
-	return true;
+    if (password.length < 6) {
+        alert("Password must be at least 6 characters");
+        return false;
+    }
+    return true;
 }
 
 export default useSignup;
