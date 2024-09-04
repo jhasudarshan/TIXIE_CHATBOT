@@ -1,18 +1,27 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/LoginNew.css";
 import loginVideo from "../assets/Login-negate.mp4"; 
 import { useSignin } from "../hooks/useSignin";
+import { useAuthContext } from "../context/AuthContext.jsx";
 
 function LoginPage({ onClose, openSignup }) {
-  const [email,setEmail] = useState();
-  const [password,setPassword] = useState();
-
-  const {loading,signin} = useSignin();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { loading, signin } = useSignin();
+  const { setAuthUser } = useAuthContext();
+  const navigate = useNavigate();
 
   const handleSignin = async (e) => {
     e.preventDefault();
-    await signin({email,password})
-  }
+    const user = await signin({ email, password });
+    if (user) {
+      setAuthUser(user); // Set the authenticated user
+      localStorage.setItem("chat-user", JSON.stringify(user)); // Store user in localStorage
+      onClose(); // Close the login window
+      navigate('/'); // Redirect to the homepage
+    }
+  };
 
   return (
     <div className="overlay">
@@ -25,8 +34,8 @@ function LoginPage({ onClose, openSignup }) {
           <form onSubmit={handleSignin}>
             <div className="input-group">
               <input 
-                type="text" 
-                placeholder="Username" 
+                type="email" 
+                placeholder="Email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -49,7 +58,7 @@ function LoginPage({ onClose, openSignup }) {
               </a>
             </div>
             <button type="submit" className="login-button">
-              {loading ? <span>loading</span> : "Sign In"}
+              {loading ? <span>Loading...</span> : "Sign In"}
             </button>
           </form>
           <div className="signup-link">
@@ -66,7 +75,7 @@ function LoginPage({ onClose, openSignup }) {
           </div>
         </div>
         <div className="right-section">
-          <video src={loginVideo} autoPlay loop muted /> 
+          <video src={loginVideo} autoPlay loop muted />
         </div>
       </div>
     </div>
