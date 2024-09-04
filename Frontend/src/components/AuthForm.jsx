@@ -1,4 +1,53 @@
-import styled from '@emotion/styled';
+// src/components/AuthForm.jsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/AuthForm.css';
+
+const AuthForm = ({ isSignup, onSubmit }) => {
+  return (
+    <form className="auth-form" onSubmit={onSubmit}>
+      <h2 className="heading">{isSignup ? 'Create an Account' : 'Welcome Back'}</h2>
+      {isSignup && <input className="input" type="text" placeholder="Full Name" required />}
+      <input className="input" type="email" placeholder="Email" required />
+      <input className="input" type="password" placeholder="Password" required />
+      {!isSignup && (
+        <div className="options-container">
+          <label className="remember-me">
+            <input type="checkbox" id="rememberMe" />
+            Remember Me
+          </label>
+          <div className="forgot-password">
+            <Link to="/ForgotPassword">Forgot Password?</Link>
+          </div>
+        </div>
+      )}
+      <button className="button" type="submit">{isSignup ? 'Sign Up' : 'Log In'}</button>
+      <div className="switch-link">
+        {isSignup ? (
+          <Link to="/Login">Already have an account? Log In</Link>
+        ) : (
+          <Link to="/Signup">Don't have an account? Sign Up</Link>
+        )}
+      </div>
+    </form>
+  );
+};
+
+export default AuthForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 const Form = styled.form`
@@ -98,7 +147,7 @@ const AuthForm = ({ isSignup, onSubmit }) => {
       <Input type="email" placeholder="Email" required />
       <Input type="password" placeholder="Password" required />
       {!isSignup && (
-        <OptionsContainer>  {/* Using the OptionsContainer here */}
+        <OptionsContainer>  {/* Using the OptionsContainer here }
           <RememberMe>
             <input type="checkbox" id="rememberMe" />
             Remember Me
@@ -120,7 +169,7 @@ const AuthForm = ({ isSignup, onSubmit }) => {
   );
 };
 
-export default AuthForm;
+export default AuthForm;*/
 
 
 
