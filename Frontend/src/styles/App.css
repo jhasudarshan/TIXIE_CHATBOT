@@ -90,6 +90,11 @@ html {
   padding: 1rem 2rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.575);
   margin-right: 2rem;
+  transition: display 0.5s ease-in-out;
+}
+
+.navbar-container.scrolled {
+  display: none;
 }
 
 .navbar-brand {
@@ -240,12 +245,13 @@ html {
   display: block;
   margin: 0 auto; /* Center button horizontally */
   transform: translateY(-50%);
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     90deg,
     #7c4dff2c,
     #3efee820,
     rgba(236, 245, 69, 0.128)
-  );
+  ); */
+  background-color: #000000;
   border: 5px solid;
   font-size: 2rem;
   color: #f5f5f5;
@@ -258,7 +264,8 @@ html {
 }
 
 .chatbot-button:hover {
-  background-color: rgba(255, 255, 255, 0.144);
+  background-color: rgba(255, 255, 255, 0.674);
+  color: #000000;
 }
 
 /* Media queries for responsiveness */
@@ -277,6 +284,7 @@ html {
   .homepage-text {
     font-size: smaller; /* Adjust font size for smaller screens */
   }
+
 
   .chatbot-button {
     margin-top: 1rem; /* Space between elements on smaller screens */
@@ -311,6 +319,18 @@ html {
   padding: 0;
   margin: 0;
   z-index: 2000;
+  animation: opening 0.3s forwards;
+}
+
+@keyframes opening{
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .chatbot-header {
@@ -375,6 +395,35 @@ html {
   align-self: flex-start;
   background-color: #e0e0e0;
   color: #000000;
+}
+
+.chatbot-footer {
+  display: flex;
+  padding: 1rem;
+  border-top: 1px solid #dddddd;
+  background-color: #000000;
+  width: 100%;
+  justify-content: center; 
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.chatbot-footer input[type="text"] {
+  flex: 1; /* Take remaining space */
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fcfcfcac;
+  color: #000000;
+}
+
+.chatbot-footer button {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 /* Media queries for desktop screens */

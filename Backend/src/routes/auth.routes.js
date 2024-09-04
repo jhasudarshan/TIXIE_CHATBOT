@@ -1,39 +1,25 @@
+//import
+import { signup, login, logout  } from '../controller/auth.controller.js'
+import { auth ,isUser } from '../middleware/auth.middleware.js'
+// =======
 import { Router } from "express";
-import { login, signup  } from '../controller/auth.controller.js';
-
 const router = Router();
-
 
 
 router.post("/login",login);
 router.post("/signup",signup);
+router.post("/logout",logout );
 
 
 
 // protected route (means jisko permission rahega wahi access karenge) 
 
 // Testing Route for Middleware
-router.get("/test", auth, (req,res) => {
-    res.json({
+// Protected Route for User
+router.get("/user", auth, isUser, (req, res) => {
+    res.status(200).json({
         success: true,
-        message: "Test successful"
-    })
-})
-
-
-// Protected Route for Student
-router.get("/student", auth, isStudent, (req, res) => {
-    res.json({
-        success: true,
-        message: "Welcome to Protected Route for Student"
-    })
-});
-
-// Protected Route for Student
-router.get("/admin", auth, isAdmin, (req, res) => {
-    res.json({
-        success: true,
-        message: "Welcome to Protected Route for Admin"
+        message: 'Access granted to user route'
     })
 });
 

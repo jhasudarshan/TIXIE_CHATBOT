@@ -12,8 +12,8 @@ python -m venv env
 .\env\Scripts\activate
 ## after setup venv installation packages of python
 pip install scikit-learn
-pip install numpy
-pip install joblib
+<!-- pip install numpy
+pip install joblib -->
 
 
 

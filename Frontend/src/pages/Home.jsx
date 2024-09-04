@@ -9,13 +9,8 @@ const Home = () => {
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const videoRef = useRef(null);
 
-  const handleOpenChatbot = () => {
-    setIsChatbotOpen(true);
-  };
-
-  const handleCloseChatbot = () => {
-    setIsChatbotOpen(false);
-  };
+  const handleOpenChatbot = () => setIsChatbotOpen(true);
+  const handleCloseChatbot = () => setIsChatbotOpen(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -44,7 +39,11 @@ const Home = () => {
             </div>
           </div>
           <div className="right-container">
-            <button className="chatbot-button" onClick={handleOpenChatbot}>
+            <button 
+              className="chatbot-button" 
+              onClick={handleOpenChatbot}
+              aria-label="Open Chatbot"
+            >
               Open Chatbot
             </button>
           </div>
@@ -62,4 +61,4 @@ const Home = () => {
   );
 };
 
-export default Home; 
+export default Home;
