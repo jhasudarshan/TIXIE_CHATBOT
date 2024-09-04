@@ -4,35 +4,56 @@ import jwt from 'jsonwebtoken';
 
 // Sign up route handler
 const signup = async (req, res) => {
+    // get data
+    const { name, email, password, phoneNumber } = req.body;
     try {
-        // get data
-        const { name, email, password, role } = req.body;
 
         // check if user already exist 
         const existingUser = await User.findOne({ email });
 
         if (existingUser) {
             return res.status(400).json({
-                success: false,
-                message: "User Already Exists",
+                // success: false,
+                message: 'User already exists. Please log in instead.'
             })
         }
 
-        // Secured password 
-        let hashedPassword;
-        try {
-            hashedPassword = await bcrypt.hash(password, 10);
-        }
-        catch (err) {
-            return res.status(500).json({
-                success: false,
-                message: "Error in hashing password",
-            })
-        }
 
-        // Create Entry for User
-        let user = await User.create({
-            name,email,password:hashedPassword,role
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 12);
+
+        // let hashedPassword;
+        // try {
+        //     hashedPassword = await bcrypt.hash(password, 10);
+        // }
+        // catch (err) {
+        //     return res.status(500).json({
+        //         success: false,
+        //         message: "Error in hashing password",
+        //     })
+        // }
+
+        // Create a new user
+        const newUser = await User.create({
+            name,
+            email,
+            password: hashedPassword,
+            phoneNumber 
+        });
+
+        // Save the new user in the database
+        await newUser.save();
+
+
+        // Generate a JWT token
+        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+        // Set the token as an HTTP-only cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Set to true in production
+            sameSite: 'strict',
+            maxAge: 3600000 // 1 hour
         });
 
         return res.status(200).json({
@@ -40,6 +61,8 @@ const signup = async (req, res) => {
             message : "User Created Successfully",
             //data : user
         });
+
+
     }
     catch (err) {
         console.error(err)
@@ -54,9 +77,10 @@ const signup = async (req, res) => {
 
 // Login
 const login = async (req,res) => {
+    const {email,password} = req.body;
     try
     {
-        const {email,password} = req.body;
+        // if email/password is empty
         if(!email || !password)
         {
             return res.status(400).json({
@@ -127,7 +151,20 @@ const login = async (req,res) => {
     }
 }
 
-exports ={
+// Logout
+const logout = (req, res) => {
+    // Clear the token cookie
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict'
+    });
+    res.status(200).json({ message: 'Logout successful' });
+};
+
+
+export {
     signup,
-    login
+    login,
+    logout
 }

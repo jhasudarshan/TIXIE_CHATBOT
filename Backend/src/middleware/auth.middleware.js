@@ -14,7 +14,7 @@ const auth = (req, res, next) => {
         if (!token) {
             return res.status(401).json({
                 success: false,
-                message: "token missing"
+                message: "Token missing"
             })
         }
 
@@ -23,13 +23,12 @@ const auth = (req, res, next) => {
             const decode = jwt.verify(token, process.env.JWT_SECRET);
 
             console.log(decode)   //ye token ka data dega
-
             req.user = decode;
         }
         catch (error) {
             return res.status(401).json({
                 success: false,
-                message: "token is invalid"
+                message: "Token is invalid"
             })
         }
 
@@ -45,12 +44,12 @@ const auth = (req, res, next) => {
 }
 
 // check authorization
-const isStudent = (req, res, next) => {
+const isUser = (req, res, next) => {
     try {
-        if (req.user.role !== "Student") {
+        if (req.user.role !== "isUser") {
             return res.status(401).json({
                 success: false,
-                message: "This is a protect route for students you can not access it"
+                message: "This is a protect route for user"
             })
         }
         next();
@@ -63,26 +62,9 @@ const isStudent = (req, res, next) => {
     }
 }
 
-const isAdmin = (req, res, next) => {
-    try {
-        if (req.user.role !== "Admin") {
-            return res.status(401).json({
-                success: false,
-                message: "This is a protect route for Admins,you can not access it"
-            })
-        }
-        next();
-    }
-    catch (err) {
-        return res.status(500).json({
-            success: false,
-            message: "User Role is not Matching"
-        })
-    }
-}
 
-exports = {
+
+export{
     auth,
-    isStudent,
-    isAdmin
+    isUser
 }
