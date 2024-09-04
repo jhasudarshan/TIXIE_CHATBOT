@@ -9,20 +9,22 @@ function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const navbarContainer = document.querySelector('.navbar-container');
-
-      if (window.scrollY > 500) {
-        navbarContainer.classList.add('scrolled');
+      const opacityValue = 1 - window.scrollY / 800;
+  
+      if (window.scrollY > 800) {
+        navbarContainer.style.opacity = '0';
       } else {
-        navbarContainer.classList.remove('scrolled');
+        navbarContainer.style.opacity = opacityValue.toString();
       }
     };
-
+  
     window.addEventListener('scroll', handleScroll);
-
+  
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  
 
   return (
     <>

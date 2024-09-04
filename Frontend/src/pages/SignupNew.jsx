@@ -25,7 +25,7 @@ function SignupPage({ onClose, onSwitch }) {
               <input type="password" placeholder="Password" />
             </div>
             <div className="signup-input-group">
-              <input type="confirm-password" placeholder="Confirm Password" />
+              <input type="password" placeholder="Confirm Password" />
             </div>
             <button type="submit" className="signup-button">
               Sign Up
