@@ -3,14 +3,14 @@ import { useState } from "react";
 import { useAuthContext } from "../context/AuthContext";
 import host_url from "../constant";
 
-const useSignin =  () => {
-    const [ loading, setLoading ] = useState(false);
+const useSignin = () => {
+    const [loading, setLoading] = useState(false);
     const { setAuthUser } = useAuthContext();
 
-    const signin = async ({  email, password }) => {
-        console.log(email)
-        const success = handleInputErrors({  email, password });
-        if( !success){
+    const signin = async ({ email, password }) => {
+        console.log(email);
+        const success = handleInputErrors({ email, password });
+        if (!success) {
             return;
         }
         setLoading(true);
@@ -22,9 +22,8 @@ const useSignin =  () => {
                 headers: { "Content-Type": "application/json" }
             });
 
-            const data = await res.data; // Ensure you get the correct data
+            const data = await res.data;
 
-            // Assuming res.data contains a 'token' and other user data
             console.log("API Response:", data);
 
             if (data.error) {
@@ -33,11 +32,15 @@ const useSignin =  () => {
 
             localStorage.setItem("chat-user", JSON.stringify(data));
             await setAuthUser(data);
-            alert(`login successfull`);
+            alert('Login successful');
+
+            // Refresh the page after successful login
+            window.location.reload();
+
         } catch (error) {
             toast.error(error.message);
         } finally {
-            setLoading(false);   
+            setLoading(false);
         }
     };
 
@@ -45,12 +48,12 @@ const useSignin =  () => {
 }
 
 function handleInputErrors({ email, password }) {
-    if( !email && !password){
-        alert('all field are required');
+    if (!email || !password) {
+        alert('All fields are required');
         return false;
     }
 
-	return true;
+    return true;
 }
 
 export {
