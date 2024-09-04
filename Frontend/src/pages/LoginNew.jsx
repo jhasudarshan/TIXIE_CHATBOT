@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/LoginNew.css";
 import loginVideo from "../assets/Login-negate.mp4"; 
+import { useSignin } from "../hooks/useSignin";
 
 function LoginPage({ onClose, openSignup }) {
+  const [email,setEmail] = useState();
+  const [password,setPassword] = useState();
+
+  const {loading,signin} = useSignin();
+
+  const handleSignin = async (e) => {
+    e.preventDefault();
+    await signin({email,password})
+  }
+
   return (
     <div className="overlay">
       <div className="popup-window">
@@ -11,12 +22,22 @@ function LoginPage({ onClose, openSignup }) {
         </button>
         <div className="left-section">
           <h2>Login</h2>
-          <form>
+          <form onSubmit={handleSignin}>
             <div className="input-group">
-              <input type="text" placeholder="Username" />
+              <input 
+                type="text" 
+                placeholder="Username" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="input-group">
-              <input type="password" placeholder="Password" />
+              <input 
+                type="password" 
+                placeholder="Password" 
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
             <div className="options-container">
               <div className="remember-me">
@@ -28,7 +49,7 @@ function LoginPage({ onClose, openSignup }) {
               </a>
             </div>
             <button type="submit" className="login-button">
-              Sign In
+              {loading ? <span>loading</span> : "Sign In"}
             </button>
           </form>
           <div className="signup-link">

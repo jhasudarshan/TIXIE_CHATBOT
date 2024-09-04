@@ -1,19 +1,8 @@
 import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import LoginPage from '../pages/Login';
-import SignupPage from '../pages/Signup';
-=======
-=======
->>>>>>> 24c2db6f421f7bb38a455f32701f5624309b0a95
 import { Link } from "react-router-dom";
 import LoginPage from '../pages/LoginNew';
 import SignupPage from '../pages/SignupNew';
 import logo from '../assets/logo-no-background.svg';
-<<<<<<< HEAD
->>>>>>> 24c2db6f421f7bb38a455f32701f5624309b0a95
-=======
->>>>>>> 24c2db6f421f7bb38a455f32701f5624309b0a95
 
 function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
