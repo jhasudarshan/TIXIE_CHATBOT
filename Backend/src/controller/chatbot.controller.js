@@ -6,14 +6,14 @@ import {__dirname } from '../../app.js'
 const getIntentFromMessage = async(message) => {
   const pythonScriptPath = path.join(__dirname, 'ChatBot', 'nlp_model.py');
   return new Promise((resolve, reject) => {
-    exec(`python ChatBot/nlp_model.py ${message}`, (error, stdout, stderr) => {
+    exec(`python "${pythonScriptPath}" "${message}"`, (error, stdout, stderr) => {
       if (error) {
         return reject(error);
       }
       try {
-        // const result = JSON.parse(stdout);
+        //const result = JSON.parse(stdout);
         // resolve(result.intent);
-        console.log(stdout);
+        resolve(stdout.trim());
       } catch (e) {
         reject(e);
       }
@@ -21,7 +21,8 @@ const getIntentFromMessage = async(message) => {
   });
 }
 
-const handleChat =  async(message, userId)  => {
+const handleChat =  async(req, res)  => {
+  const {message} = req.body;
   const intent = await getIntentFromMessage(message);
   console.log(intent);
   // if (intent === 'book_ticket') {
@@ -49,6 +50,9 @@ const handleChat =  async(message, userId)  => {
   // } else {
   //   return 'Sorry, I did not understand that. Can you please rephrase?';
   // }
+  res.status(200).json({
+    intent
+  })
 }
 
 export default handleChat;

@@ -1,17 +1,36 @@
 import React, { useState } from 'react';
+import { useChatHandler } from '../hooks/useChatHandler';
 
 function Chatbot({ onClose }) {
   const [chatMessages, setChatMessages] = useState([]);
 
-  const handleSendMessage = (e) => {
+  const handleSendMessage = async(e) => {
     e.preventDefault();
     const userInput = document.getElementById("chatbot-input").value;
+    useChatHandler(userInput.trim());
     if (userInput.trim() !== "") {
+      // Add user message to chat
       setChatMessages(prevMessages => [
         ...prevMessages,
-        { type: "user", text: userInput },
-        { type: "bot", text: "This is a reply" },
+        { type: "user", text: userInput }
       ]);
+
+      // Add a loading message placeholder
+      setChatMessages(prevMessages => [
+        ...prevMessages,
+        { type: "bot", text: "Typing...", loading: true }
+      ]);
+
+      // Send message to backend and get bot response
+      const botReply = await useChatHandler(userInput);
+
+      // Replace the loading message with the actual bot response
+      setChatMessages(prevMessages => 
+          prevMessages.map(msg => 
+              msg.loading ? { ...msg, text: botReply, loading: false } : msg
+          )
+      );
+
       document.getElementById("chatbot-input").value = "";
     }
   };
