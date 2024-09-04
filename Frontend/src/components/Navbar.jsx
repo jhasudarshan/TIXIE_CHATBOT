@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import LoginPage from '../pages/LoginNew';
-import SignupPage from '../pages/SignupNew';
+import LoginPage from '../pages/Login';
+import SignupPage from '../pages/Signup';
 import logo from '../assets/logo-no-background.svg';
 
 function Navbar() {

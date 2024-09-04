@@ -2,8 +2,8 @@ import React from "react";
 import './styles/App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-import LoginPage from './pages/LoginNew';
-import SignupPage from './pages/SignupNew';
+import LoginPage from './pages/Login';
+import SignupPage from './pages/Signup';
 import Terms from './pages/Terms';
 
 const App = () => {
