@@ -5,7 +5,7 @@ import path from 'path';
 //import user from "./src/routes/auth.routes.js";
 
 dotenv.config({
-    path: './backend/.env'
+    path: '.env'
 })
 const __dirname = path.resolve();
 const app = express();
