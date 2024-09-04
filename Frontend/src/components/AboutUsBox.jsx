@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../assets/logo-no-background.svg';
 
 function AboutUsBox() {
   return (
@@ -7,8 +8,7 @@ function AboutUsBox() {
       <hr />
       <div className="box-content">
         <div className="left-content">
-          <img src="/assets/logo.png" alt="Logo" />
-          <p>Tixie</p>
+        <img src={logo} alt="Logo" className="logo" />
         </div>
         <div className="right-content">
           <p>Meet our AI-powered chatbot! It:</p>

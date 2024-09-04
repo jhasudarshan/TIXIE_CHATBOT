@@ -21,6 +21,7 @@ html {
   align-items: center; /* Center content vertically */
 }
 
+
 /* Optional: You may need to adjust the height in case of a different navbar size */
 @media (max-width: 768px) {
   .section {
@@ -31,6 +32,21 @@ html {
 @media (max-width: 480px) {
   .section {
     margin-top: 2rem; /* Further adjustment for very small screens */
+  }
+}
+.logo {
+  height: 80px; /* Adjust size as needed */
+  width: auto; /* Maintain aspect ratio */
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+@media (max-width: 768px) {
+  .logo {
+    height: 40px; /* Smaller size for mobile */
   }
 }
 
@@ -519,8 +535,8 @@ html {
 }
 
 .left-content img {
-  width: 40px; /* Adjusted size for better fit */
-  height: 40px;
+  width: 70px; /* Adjusted size for better fit */
+  height: auto;
 }
 
 .right-content {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import LoginPage from '../pages/LoginNew';
 import SignupPage from '../pages/SignupNew';
+import logo from '../assets/logo-no-background.svg';
 
 function Navbar() {
   const [showLogin, setShowLogin] = useState(false);
@@ -29,7 +31,11 @@ function Navbar() {
   return (
     <>
       <nav className="navbar">
-        <div className="navbar-brand">Tixie</div>
+      <div className="logo-container">
+        <img src={logo} alt="Logo" className="logo" />
+      </div>
+
+
         <div className="navbar-container">
           <div className="navbar-links">
             <a href="#" className="navbar-link">Home</a>

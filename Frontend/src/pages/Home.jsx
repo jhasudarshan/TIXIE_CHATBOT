@@ -5,6 +5,7 @@ import AboutUsBox from "../components/AboutUsBox";
 import Footer from "../components/Footer";
 import "../styles/App.css";
 
+
 const Home = () => {  
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const videoRef = useRef(null);
@@ -26,6 +27,8 @@ const Home = () => {
           Your browser does not support the video tag.
         </video>
       </div>
+
+      
 
       <Navbar />
 
