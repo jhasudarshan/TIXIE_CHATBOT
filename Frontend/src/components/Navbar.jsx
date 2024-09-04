@@ -11,9 +11,9 @@ function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       const navbarContainer = document.querySelector('.navbar-container');
-      const opacityValue = 1 - window.scrollY / 800;
+      const opacityValue = 1 - window.scrollY / 200;
   
-      if (window.scrollY > 800) {
+      if (window.scrollY > 200) {
         navbarContainer.style.opacity = '0';
       } else {
         navbarContainer.style.opacity = opacityValue.toString();
