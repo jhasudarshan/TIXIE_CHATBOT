@@ -1,84 +1,46 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from '@emotion/styled';
-
-const FooterContainer = styled.footer`
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 20px 0;
-  text-align: center;
-  
-`;
-
-const FooterContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const FooterContact = styled.div`
-  margin-bottom: 15px;
-`;
-
-const FooterLink = styled.a`
-  color: #ffffff;
-  text-decoration: none;
-  margin: 0 10px;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #ff4500;
-  }
-`;
-
+import '../styles/footer.css'
 
 function Footer() {
   return (
-    <FooterContainer>
+    <footer className="footer-container">
+    <div className="footer-content">
+      <div className="footer-contact">
+        <p>Email: <a href="mailto:support@tixie.com">support@tixie.com</a></p>
+        <p>Customer Support: <a href="tel:+1234567890">+044-25262999</a></p>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <Link to="/Terms">Terms of Service</Link>
+      </div>
+      <div>
+          <p className="text-center mt-2">
+            &copy; Made with love by Team Botcoders
+          </p>
+      </div>
+  </div>
+  </footer>
+  );
+}
+
+export default Footer;
+
+/*
+  <FooterContainer>
       <FooterContent>
         <FooterContact>
-          <p>Email: <FooterLink href="mailto:support@example.com">support@example.com</FooterLink></p>
-          <p>Customer Support: <FooterLink href="tel:+1234567890">+1 (234) 567-890</FooterLink></p>
+          <p>Email: <a href="mailto:support@tixie.com">support@tixie.com<<a></p>
+          <p>Customer Support: <a href="tel:+1234567890">+044-25262999<<a></p>
         </FooterContact>
         <div>
-          <FooterLink href="#about">About Us</FooterLink>
-          <FooterLink href="/privacy">Privacy Policy</FooterLink>
-          <FooterLink href="/terms">Terms of Service</FooterLink>
-          <FooterLink href="/contact">Contact Us</FooterLink>
+          <a href="#home">Home<<a>
+          <a href="#about">About Us<<a>
+          <Link to="/Terms">Terms of Service</Link>
+          
         </div>
         <p className="text-center mt-2">
           &copy; Made with love by Team Botcoders
         </p>
       </FooterContent>
     </FooterContainer>
-  );
-}
-
-export default Footer;
-
-/*function Footer() {
-  return (
-    <footer id="contact" className="footer footer-three">
-      <div className="footer-container">
-        <p className="text-center">: Quick links :</p>
-        <div className="d-flex justify-content-center">
-          <Link to="/about" className="mx-2">
-            About
-          </Link>
-          <Link to="/contact" className="mx-2">
-            Contact Us
-          </Link>
-          <Link to="/login" className="mx-2">
-            Login
-          </Link>
-        </div>
-        <p className="text-center mt-2">
-          &copy; Made with love by Team Botcoders
-        </p>
-      </div>
-    </footer>
-  );
-}
-
-export default Footer;*/
+</footer>*/
