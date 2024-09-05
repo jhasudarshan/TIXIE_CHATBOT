@@ -1,6 +1,6 @@
 #import pickle
 import sys
-#import json
+import json
 
 # Load everything from the pickle file
 
@@ -78,17 +78,22 @@ def main():
     # Check for numeric input first
     if user_message.isdigit():
         re = user_message
-        print(f"trying to book {user_message} if available")
-        print(re)
+        #print(f"trying to book {user_message} if available")
+        result = {
+            "ticket_no": re
+        }
+        
+        print(json.dumps(result))
         
     elif 'book' in user_message.lower():
         # Handle the booking intent separately
-        re = response = handle_booking_intent(user_message)
+        re = handle_booking_intent(user_message)
         
-        print(f"trying to book {response} if available")
-        print(re)
-       
-        return int(re)
+        result = {
+            "ticket_no": re
+        }
+        
+        print(json.dumps(result)) 
         
         '''
     if 'space exploration'.lower() in user_message.lower() and 'book' in user_message.lower():

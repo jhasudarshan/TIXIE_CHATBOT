@@ -1,4 +1,5 @@
 import sys
+import json
 
 def main():
     if len(sys.argv) > 1:
@@ -8,17 +9,24 @@ def main():
 
     # Check if any of the show names are in the user message
     if 'ancient civilizations' in user_message.lower():
-        print("trying to book if available")
-        return 'ancient civilizations'
-        
+        result = {
+            "m_name":"ancient civilizations"
+        }
+        print(json.dumps(result))
     elif 'space exploration' in user_message.lower():
-        print("trying to book if available")
-        return 'space exploration'
-        
+        result = {
+            "m_name":"space exploration"
+        }
+        print(json.dumps(result))
     elif 'renaissance art' in user_message.lower():
-        print("trying to book if available")
-        return 'renaissance art'
+        result = {
+            "m_name":"renaissance art"
+        }
+        print(json.dumps(result))
     else:
-        print("Enter a valid show name")
+        result = {
+            "m_name":""
+        }
+        print(json.dumps(result))
 
 main()

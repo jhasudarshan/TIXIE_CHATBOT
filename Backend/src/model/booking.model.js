@@ -1,9 +1,22 @@
-import mongoose from "mongoose";
+import mongoose,{Schema} from "mongoose";
 
-const BookingSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  ticket: { type: mongoose.Schema.Types.ObjectId, ref: 'Ticket' },
-  bookingDate: { type: Date, default: Date.now }
+const BookingSchema = new Schema({
+  numberOfTicket : {
+    type: Number,
+    require:true
+  },
+  ticket: { 
+    type: Schema.Types.ObjectId,
+    ref: 'Ticket' 
+  },
+  bookingDate: { 
+    type: Date, 
+    default: Date.now 
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 const Booking = mongoose.model('Booking', BookingSchema);
