@@ -9,6 +9,7 @@ npm run dev
 
 ## venv setup for python(in root directory)   (venv means virtual enviroment)
 python -m venv env
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 .\env\Scripts\activate
 ## after setup venv installation packages of python
 pip install scikit-learn
