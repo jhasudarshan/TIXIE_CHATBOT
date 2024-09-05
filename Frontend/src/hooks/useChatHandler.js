@@ -10,7 +10,7 @@ const useChatHandler = async(message) => {
             headers: { "Content-Type": "application/json" }
         });
         console.log(resp);
-        return resp.data.intent;
+        return resp.data.response;
     } catch (error) {
         console.log(`Error message: ${error}`);
     }

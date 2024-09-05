@@ -11,9 +11,9 @@ const getIntentFromMessage = async(message) => {
         return reject(error);
       }
       try {
-        //const result = JSON.parse(stdout);
-        // resolve(result.intent);
-        resolve(stdout.trim());
+        const result = JSON.parse(stdout.trim());
+        resolve(result);
+        // resolve(stdout);
       } catch (e) {
         reject(e);
       }
@@ -23,8 +23,21 @@ const getIntentFromMessage = async(message) => {
 
 const handleChat =  async(req, res)  => {
   const {message} = req.body;
-  const intent = await getIntentFromMessage(message);
+  const result = await getIntentFromMessage(message);
+  const intent = result.intent;
+  const response = result.response;
+  console.log(result);
   console.log(intent);
+  console.log(response);
+  // {tag, resp}
+
+  /*if(tag =='Book a ticket'){
+    const {museumName} = nlp_show();
+    if(muse)
+  }
+
+
+  */
   // if (intent === 'book_ticket') {
   //   // Logic to book a ticket
   //   const ticket = await Ticket.findOne({ available: true });
@@ -51,7 +64,7 @@ const handleChat =  async(req, res)  => {
   //   return 'Sorry, I did not understand that. Can you please rephrase?';
   // }
   res.status(200).json({
-    intent
+    response
   })
 }
 

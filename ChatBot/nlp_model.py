@@ -34,9 +34,9 @@ def get_response(intent):
     # Find a response for the predicted intent
     for intent_data in data['intents']:
         if intent in intent_data.get('Tags', []):
-            return intent_data.get('Response', [''])[0]  # Adjust if multiple responses
+            return intent_data.get('Tags')[0], intent_data.get('Response', [''])[0]  # Adjust if multiple responses
     
-    return "I'm sorry, I don't understand your query."
+    return intent,"I'm sorry, I don't understand your query."
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
@@ -45,5 +45,10 @@ if __name__ == "__main__":
         user_message = "what is the show time for ancient civilaisations"  # Provide a default message for testing or fallback
 
     intent = predict_intent(user_message)
-    response = get_response(intent)
-    print(response)
+    tag, response = get_response(intent)
+    result = {
+        "intent": tag,
+        "response": response
+    }
+    
+    print(json.dumps(result)) 
