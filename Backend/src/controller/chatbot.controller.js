@@ -113,6 +113,8 @@ const saveBookingToDatabase = async (userId, showId, noOfTickets) => {
         //Save Booking Details
         // Step 1: Fetch the relevant ticket associated with the show
         const ticket = await Ticket.findOne({ showId });
+
+        const show = await Show.findById(showId);
     
         if (!ticket) {
             return res.status(404).json({ message: "Ticket not found for the given show." });
@@ -131,7 +133,7 @@ const saveBookingToDatabase = async (userId, showId, noOfTickets) => {
         // Step 5: Update the available tickets in the Ticket model
         ticket.availableTickets -= noOfTickets;
         await ticket.save();
-        console.log(`Booking saved for user ${userId}: ${noOfTickets} tickets for show ${showId}`);
+        console.log(`Booking saved for user ${userId}: ${noOfTickets} tickets for show ${show.title}`);
         //return savedBooking;
     } catch (error) {
       console.error('Failed to save booking to database:', error);
@@ -142,13 +144,14 @@ const saveBookingToDatabase = async (userId, showId, noOfTickets) => {
 const sendConfirmationEmail = async (userId, noOfTickets, showId) => {
 
     const user = await User.findById(userId);
+    const show = await Show.findById(showId);
     const userEmail = user.email;
     console.log(userEmail); 
     const mailOptions = {
       from: process.env.EMAIL_ADD, // Replace with your verified sender email
       to: userEmail, // Replace with user's email
       subject: 'Booking Confirmation',
-      text: `Dear User,\n\nYou have successfully booked ${noOfTickets} tickets for the ${showId} exhibition.\n\nThank you for booking with us!`,
+      text: `Dear User,\n\nYou have successfully booked ${noOfTickets} tickets for the ${show.title} exhibition.\n\nThank you for booking with us!`,
     };
   
     try {
