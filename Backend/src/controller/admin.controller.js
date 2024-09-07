@@ -46,17 +46,19 @@ const addshowDetails = async (req, res) => {
 }
 
 const addTicketDetails = async (req, res) => {
-    const {showId, price, availableTickets} = req.body;
+    const {showName, price, availableTickets} = req.body;
 
-    if(!showId || !price || !availableTickets){
+    if(!showName || !price || !availableTickets){
         return res.status(400).json({
             // success: false,
             message: 'all file required'
         });
     }
 
+    const show = await Show.findOne({title: showName});
+
     const newTicket = await Ticket.create({
-        showId,
+        showId: show._id,
         price,
         availableTickets
     });

@@ -75,8 +75,13 @@ const getNumberOfTicket = async (message) => {
         return reject(error);
       }
       try {
-        const result = JSON.parse(stdout.trim()); // Assuming stdout contains the show name
-        resolve(result);
+        console.log(stdout);
+        if(stdout.trim() !== ''){
+          const result = JSON.parse(stdout.trim());
+          resolve(result);
+        }
+        resolve(stdout);
+         // Assuming stdout contains the show name
       } catch (e) {
         reject(e);
       }
@@ -152,17 +157,17 @@ const sendConfirmationEmail = async (userId, noOfTickets, showId) => {
     } catch (error) {
       console.error('Failed to send confirmation email:', error);
     }
-  };
+}
 
 const handleChat = async (req, res) => {
   const { message, userId } = req.body;
-  console.log(message);
   // Initialize user session if it doesn't exist
+  
   if (!userSessions[userId]) {
     userSessions[userId] = {
       prevIntent: null,
       showId: null,
-      noOfTickets: null
+      noOfTickets: 0
     };
   }
 
@@ -170,116 +175,93 @@ const handleChat = async (req, res) => {
   const intent = result.intent;
   const response = result.response;
 
+  console.log("Response: ",response);
+  console.log("userSession -> pevIntent: ",userSessions[userId].prevIntent);
+  console.log("userSession -> showId: ",userSessions[userId].showId);
+  console.log("userSession -> noOfTicket: ",userSessions[userId].noOfTickets);
+
+
   // Handle 'ticket_booking' intent
-  if (intent === 'ticket_booking') {
-    userSessions[userId].prevIntent = intent;
+  if ( intent === 'ticket_booking' || userSessions[userId].prevIntent === 'ticket_booking') {
+    if(intent === 'ticket_booking'){
+      userSessions[userId].prevIntent = intent;
+    }
 
     const result1 = await getShowNameFromMessage(message);
     const showName = result1.m_name.trim();
-
-    // Find the show in the database using the extracted showName
-    const show = await Show.findOne({ title: showName }); // Assuming the field is 'name' in Show schema
-
-    if (!show) {
-        return res.status(400).json({
-            response: "This show is not available. Please enter a valid show name."
-        });
-    }
-
-    userSessions[userId].showId = show._id;
-
     const result2 = await getNumberOfTicket(message);
-    if(!result2){
+    let show,noOfTickets;
+
+    if(showName !== '' || userSessions[userId].showId !== null){
+
+      show = await Show.findOne({ title: showName });
+
+      if (!show && !userSessions[userId].showId) 
+      {
+        userSessions[userId].noOfTickets = result2.ticket_no;
+    
+        //go for show name
         return res.status(200).json({
-            response: `You've chosen the show: ${show.title}. How many tickets would you like to book?`
-          });
-    }
-    const noOfTickets = result2.ticket_no;
+          response: "Please enter a valid show name"
+        });
 
-    const ticket = await Ticket.findOne({ showId: userSessions[userId].showId });
-
-    if (noOfTickets > ticket.availableTickets) {
-      return res.status(400).json({
-        response: `We only have ${availableTickets} tickets available. Please book fewer tickets.`
-      });
-    }
-
-    userSessions[userId].noOfTickets = noOfTickets;
-
-    // Initiate payment process
-    //const paymentSuccessful = await initiatePaymentProcess(userId, noOfTickets, userSessions[userId].museumName);
-
-    // if (!paymentSuccessful) {
-    //   return res.status(500).json({
-    //     response: "Payment failed. Please refresh the chatbot to initiate the payment again."
-    //   });
-    // }
-
-    // Save booking details to the database
-    await saveBookingToDatabase(userId, userSessions[userId].showId, noOfTickets);
-
-    const showId = userSessions[userId].showId;
-    // Send confirmation email to the user
-    await sendConfirmationEmail(userId, noOfTickets, showId);
-
-    return res.status(200).json({
-      response: `You've successfully booked ${noOfTickets} tickets for the ${showName} exhibition. A confirmation email has been sent to you.`
-    });
-
-  } else if (userSessions[userId].prevIntent === 'ticket_booking') {
-    let showName,show;
-    if (!userSessions[userId].showId) {
-        showName = await getShowNameFromMessage(message);
-        show = await Show.findOne({showName});
-
-        if (!show) {
-            return res.status(400).json({
-              response: "This show is not available. Please enter a valid show name."
-            });
+      }else{
+        if(show){
+          userSessions[userId].showId = show._id;
+        }else{
+          show = await Show.findById(userSessions[userId].showId);
         }
 
-        userSessions[userId].showId = show._id;
+        console.log("result2: ",result2);
+        console.log("result2.ticket_no",result2.ticket_no);
+        console.log("userSessions[userId].noOfTickets",userSessions[userId].noOfTickets);
 
-    }
+        if(!result2.ticket_no && !userSessions[userId].noOfTickets){
+          //go for number of ticket to book
+          return res.status(200).json({
+              response: `You've chosen the show: ${show.title}. How many tickets would you like to book?`
+          });
+        }
 
+        noOfTickets = result2.ticket_no || userSessions[userId].noOfTickets;
+        const ticket = await Ticket.findOne({ showId: userSessions[userId].showId });
 
-    const result = await getNumberOfTicket(message);
-    if(!result){
+        //check ticket is available or not
+        if (!ticket && (noOfTickets > ticket.availableTickets)) {
+          return res.status(200).json({
+            response: `We only have ${ticket.availableTickets} tickets available. Please book fewer tickets.`
+          });
+        }
+
+        // Initiate payment process
+        //const paymentSuccessful = await initiatePaymentProcess(userId, noOfTickets, userSessions[userId].museumName);
+
+        // Save booking details to the database
+        const showId = userSessions[userId].showId
+        //save details to database
+        await saveBookingToDatabase(userId, showId, noOfTickets);
+    
+        // Send confirmation email to the user
+        await sendConfirmationEmail(userId, noOfTickets, showId);
+        userSessions[userId] = {
+          prevIntent: null,
+          showId: null,
+          noOfTickets: null
+        };
+
+        return res.status(200).json({
+          response: `You've successfully booked ${noOfTickets} tickets for the ${show.title} exhibition. A confirmation email has been sent to you.`
+        });
+
+      }
+    }else{
+      userSessions[userId].noOfTickets = result2.ticket_no;
+
+      //go for show name
       return res.status(200).json({
-        response: `You've chosen the show: ${show.title}. How many tickets would you like to book?`
+        response: "Please enter a show name"
       });
     }
-    const noOfTickets = result.ticket_no;
-    const ticket = await Ticket.findOne({ showId: userSessions[userId].showId });
-
-    if (noOfTickets > ticket.availableTickets) {
-      return res.status(400).json({
-        response: `We only have ${availableTickets} tickets available. Please book fewer tickets.`
-      });
-    }
-
-    userSessions[userId].noOfTickets = noOfTickets;
-
-    // Initiate payment process
-    //const paymentSuccessful = await initiatePaymentProcess(userId, noOfTickets, userSessions[userId].museumName);
-
-    // if (!paymentSuccessful) {
-    //   return res.status(500).json({
-    //     response: "Payment failed. Please refresh the chatbot to initiate the payment again."
-    //   });
-    // }
-
-    // Save booking details to the database
-    await saveBookingToDatabase(userId, userSessions[userId].showId, noOfTickets);
-
-    const showId = userSessions[userId].showId;
-    // Send confirmation email to the user
-    await sendConfirmationEmail(userId, noOfTickets, showId);
-
-    return res.status(200).json({
-      response: `You've successfully booked ${noOfTickets} tickets for the ${userSessions[userId].museumName} exhibition. A confirmation email has been sent to you.`
-    });
-
   } else {
     return res.status(200).json({
       response
