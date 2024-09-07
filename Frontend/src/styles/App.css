@@ -389,7 +389,7 @@ html {
 
 .chatbot-chat {
   padding: 20px;
-  background-color: #333;
+  background-color: #232323;
   height: calc(100vh - 120px);
   overflow-y: auto;
   width: 100%;

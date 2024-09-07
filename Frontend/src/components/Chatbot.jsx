@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
-import { useChatHandler } from '../hooks/useChatHandler';
+import React, { useState } from "react";
+import { useChatHandler } from "../hooks/useChatHandler";
 
 function Chatbot({ onClose }) {
   const [chatMessages, setChatMessages] = useState([]);
 
-  const handleSendMessage = async(e) => {
+  const handleSendMessage = async (e) => {
     e.preventDefault();
     const userInput = document.getElementById("chatbot-input").value;
     useChatHandler(userInput.trim());
     if (userInput.trim() !== "") {
       // Add user message to chat
-      setChatMessages(prevMessages => [
+      setChatMessages((prevMessages) => [
         ...prevMessages,
-        { type: "user", text: userInput }
+        { type: "user", text: userInput },
       ]);
 
       // Add a loading message placeholder
-      setChatMessages(prevMessages => [
+      setChatMessages((prevMessages) => [
         ...prevMessages,
-        { type: "bot", text: "Typing...", loading: true }
+        { type: "bot", text: "Typing...", loading: true },
       ]);
 
       // Send message to backend and get bot response
       const botReply = await useChatHandler(userInput);
 
       // Replace the loading message with the actual bot response
-      setChatMessages(prevMessages => 
-          prevMessages.map(msg => 
-              msg.loading ? { ...msg, text: botReply, loading: false } : msg
-          )
+      setChatMessages((prevMessages) =>
+        prevMessages.map((msg) =>
+          msg.loading ? { ...msg, text: botReply, loading: false } : msg
+        )
       );
 
       document.getElementById("chatbot-input").value = "";
@@ -39,7 +39,9 @@ function Chatbot({ onClose }) {
     <div className="chatbot-modal">
       <div className="chatbot-header">
         <h2>Chatbot</h2>
-        <button className="close-button" onClick={onClose}>Close</button>
+        <button className="close-button" onClick={onClose}>
+          Close
+        </button>
       </div>
       <div className="chatbot-chat">
         <div className="chatbot-messages">
@@ -51,8 +53,17 @@ function Chatbot({ onClose }) {
         </div>
       </div>
       <div className="chatbot-footer">
-        <input type="text" id="chatbot-input" placeholder="Type a message..." />
-        <button className="send-message" type="button" onClick={handleSendMessage}>
+        <input
+          type="text"
+          id="chatbot-input"
+          placeholder="Type a message..."
+          onKeyDown={(e) => e.key === "Enter" && handleSendMessage(e)}
+        />
+        <button
+          className="send-message"
+          type="button"
+          onClick={handleSendMessage}
+        >
           Send
         </button>
       </div>

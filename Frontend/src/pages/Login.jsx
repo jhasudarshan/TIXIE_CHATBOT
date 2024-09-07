@@ -58,7 +58,7 @@ function LoginPage({ onClose, openSignup }) {
               </a>
             </div>
             <button type="submit" className="login-button">
-              {loading ? <span>Loading...</span> : "Sign In"}
+              {loading ? <span>Loading...</span> : "Log In"}
             </button>
           </form>
           <div className="signup-link">
