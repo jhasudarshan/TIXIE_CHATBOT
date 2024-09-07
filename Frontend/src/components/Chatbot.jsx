@@ -7,6 +7,7 @@ function Chatbot({ onClose }) {
   const handleSendMessage = async (e) => {
     e.preventDefault();
     const userInput = document.getElementById("chatbot-input").value;
+    document.getElementById("chatbot-input").value = "";
     useChatHandler(userInput.trim());
     if (userInput.trim() !== "") {
       // Add user message to chat
@@ -30,8 +31,6 @@ function Chatbot({ onClose }) {
           msg.loading ? { ...msg, text: botReply, loading: false } : msg
         )
       );
-
-      document.getElementById("chatbot-input").value = "";
     }
   };
 
