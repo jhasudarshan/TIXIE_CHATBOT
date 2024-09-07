@@ -1,6 +1,6 @@
 //import
 import { signup, login, logout  } from '../controller/auth.controller.js'
-import { auth ,isUser } from '../middleware/auth.middleware.js'
+import {validateRoute} from '../middleware/validateRoute.js';
 // =======
 import { Router } from "express";
 const router = Router();
@@ -16,12 +16,11 @@ router.post("/logout",logout );
 
 // Testing Route for Middleware
 // Protected Route for User
-router.get("/user", auth, isUser, (req, res) => {
+router.get("/user", validateRoute, (req, res) => {
     res.status(200).json({
         success: true,
         message: 'Access granted to user route'
     })
 });
-
 
 export default router;

@@ -38,7 +38,7 @@ const useSignin = () => {
             window.location.reload();
 
         } catch (error) {
-            toast.error(error.message);
+            alert(error.message);
         } finally {
             setLoading(false);
         }

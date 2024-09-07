@@ -52,7 +52,7 @@ def handle_booking_intent(user_message):
         if number_of_tickets:
             return number_of_tickets  # Return only the number of tickets
         else:
-            return f"How many tickets do you want to book for {show_name}?"
+            return 0
     else:
         # If no booking intent, predict and return the intent as usual
         return predict_intent(user_message)
