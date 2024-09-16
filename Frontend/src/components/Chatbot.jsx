@@ -43,6 +43,11 @@ function Chatbot({ onClose }) {
         </button>
       </div>
       <div className="chatbot-chat">
+        {chatMessages.length === 0 && (
+          <div className="start-chatting-text">
+            <h1>Start chatting with Tixie</h1>
+          </div>
+        )}
         <div className="chatbot-messages">
           {chatMessages.map((message, index) => (
             <div key={index} className={`message ${message.type}`}>
