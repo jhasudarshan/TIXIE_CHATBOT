@@ -395,6 +395,12 @@ html {
   width: 100%;
 }
 
+.start-chatting-text {
+  text-align: center;
+  margin-top: 30vh;
+  color: rgba(255, 255, 255, 0.189);
+}
+
 .chatbot-messages {
   display: flex;
   flex-direction: column;
