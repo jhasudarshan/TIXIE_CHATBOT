@@ -1,5 +1,9 @@
 ## TIXIE_CHATBOT
 
+## Demo
+https://github.com/user-attachments/assets/7cd3fb18-4ee9-4084-96a6-56332f7ec3ef
+
+
 ## frontend setup
 cd frontend
 npm install
